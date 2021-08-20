@@ -1,5 +1,6 @@
 package com.example;
 
+import com.google.auto.service.AutoService;
 import com.sun.tools.javac.model.JavacElements;
 import com.sun.tools.javac.processing.JavacProcessingEnvironment;
 import com.sun.tools.javac.tree.JCTree;
@@ -11,6 +12,7 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.SourceVersion;
@@ -31,6 +33,7 @@ import java.util.Set;
  * @Description:
  **/
 @SupportedAnnotationTypes({"com.example.BoundInfo"})
+@AutoService(Processor.class)
 public class MyClassProcessor extends AbstractProcessor {
 
     private Messager messager;
@@ -65,7 +68,7 @@ public class MyClassProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
         generateFile(annotations,roundEnvironment);
         coverFile(annotations,roundEnvironment);
-        return true;
+        return false;
 
     }
 
